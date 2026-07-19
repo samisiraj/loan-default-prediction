@@ -18,6 +18,12 @@ def get_data(path=DATA_PATH):
 def split_data(df):
     df_full_train, df_test = train_test_split(df, test_size=0.2, random_state=1)
     df_train, df_val = train_test_split(df_full_train, test_size=0.25, random_state=1)
+
+    df_train = df_train.reset_index(drop=True)
+    df_val = df_val.reset_index(drop=True)
+    df_test = df_test.reset_index(drop=True)
+    df_full_train = df_full_train.reset_index(drop=True)
+    
     return df_train, df_val, df_test, df_full_train
 
 def main():
