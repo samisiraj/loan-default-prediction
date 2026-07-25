@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
-
+from sklearn.preprocessing import StandardScaler
 
 
 def clean_data(df, fit=None, medians=None):
@@ -44,14 +44,9 @@ def clean_data(df, fit=None, medians=None):
     df = df.drop(columns=['id', 'year'])
     
     return df, medians
-    #dtir1 debt to income ratio still nans 23k
-    #ltv loan to property value ratio 15k
-    #property value 15k
-    #loanlimit 3k
-    #approv_in_adv 908
 
 
-def prepare_data(df, encoder=None, fit=False):
+def prepare_data(df, encoder=None, scaler=None, fit=False):
     
     cat_columns = ['loan_limit', 'gender', 'approv_in_adv', 'loan_type', 'loan_purpose',
        'credit_worthiness', 'open_credit', 'business_or_commercial',
@@ -69,11 +64,15 @@ def prepare_data(df, encoder=None, fit=False):
                                 handle_unknown='ignore',
                                 sparse_output=False)
         encoder.fit(df[cat_columns])
+
+        scaler = StandardScaler()
+        scaler.fit(df[num_columns])
         
     cat_encoded = encoder.transform(df[cat_columns])
-    num_values = df[num_columns].values
+    num_values = scaler.transform(df[num_columns])
+    
     feature_names = num_columns + list(encoder.get_feature_names_out(cat_columns))  # both plain lists here, safe
 
     y = df['status'].values
     X = np.hstack([num_values, cat_encoded])
-    return X, y, encoder, feature_names
+    return X, y, encoder, scaler, feature_names
