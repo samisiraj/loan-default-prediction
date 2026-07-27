@@ -25,10 +25,3 @@ def split_data(df):
     df_full_train = df_full_train.reset_index(drop=True)
     
     return df_train, df_val, df_test, df_full_train
-
-def main():
-    df = get_data()
-    
-    
-if __name__ == '__main__':
-    main()
