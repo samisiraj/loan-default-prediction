@@ -3,3 +3,7 @@
 .DS_Store
 __pycache__
 models/*.pkl
+!models/final_xgb_model.pkl
+!models/final_encoder.pkl
+!models/final_scaler.pkl
+!models/final_medians.pkl
