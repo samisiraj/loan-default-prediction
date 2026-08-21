@@ -35,7 +35,7 @@ class LoanApplication(BaseModel):
     open_credit: Literal["nopc", "opc"]
     business_or_commercial: Literal["nob/c", "b/c"]
     loan_amount: float = Field(ge=16500, le=3576500)
-    term: float = Field(ge=96, le=360)
+    term: float = Field(ge=12, le=360)
     neg_ammortization: Literal["not_neg", "neg_amm"]
     interest_only: Literal["not_int", "int_only"]
     lump_sum_payment: Literal["not_lpsm", "lpsm"]
