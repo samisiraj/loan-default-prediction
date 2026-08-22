@@ -28,7 +28,7 @@ Note: Render free tier spins down on inactivity — first request after idle may
 ---
 
 ## Overview
-Banks frequently use ML systems to automatically reject loan applications before a human reviews them. Based on this use case of machine learning in banking, my ML project receives a loan application and predict's whether the applicant will default or not.
+Banks frequently use ML systems to automatically reject loan applications before a human reviews them. Based on this use case of machine learning in banking. This ML project receives a loan application and predicts whether the applicant is likely to default.
 
 ## Dataset
 
@@ -36,7 +36,7 @@ Banks frequently use ML systems to automatically reject loan applications before
 - Size: [148670 rows] x [34 columns]
 - Target variable: `status` (binary: default / no default)
 - The dataset contains a collection of numerical and categorical features related to applicant's information like `gender`, `age`, `income`; loan information like `loan_limit`, `loan_type`,`loan_purpose`; and more.
-- IMPORTANT — The dataset does not document units/currency for monetary fields; we have inferred USD from context (US region categories, HMDA-style fields) and treated this explicitly rather than assuming it. The dataset also has ambiguity about some fields like `loan_types` is a categorical feature with categories `type1`, `type2` and `type3` but without explicit mention of what these categories mean. We have still included these categories to be filled for getting the prediction outcome.
+- IMPORTANT — The dataset does not document units/currency for monetary fields; I have inferred USD from context (US region categories, HMDA-style fields) and treated this explicitly rather than assuming it. The dataset also has ambiguity about some fields like `loan_types` is a categorical feature with categories `type1`, `type2` and `type3` but without explicit mention of what these categories mean. I have still included these categories to be filled for getting the prediction outcome.
 - More in-depth details about the leakage features identified and dropped during exploration and more are available in [report.md](./reports/report.md).
 ## Results
 
@@ -49,9 +49,9 @@ Banks frequently use ML systems to automatically reject loan applications before
 
 ![Threshold range](reports/figures/threshold.png)
 
-We selected 0.23 because it achieved our target recall while maintaining acceptable precision.
+I selected 0.23 because it achieved our target recall while maintaining acceptable precision.
 
-- Why XGBoost? For our business model the most important metric was recall (Out of every entry who actually defaulted how many did our model actually classify as a defaulting applicant). We can compare evaluation metrics for every models we tried [here](./reports/metrics.json). XGBoost had the best ROC-AUC and PR-AUC scores for the recall value we targeted.
+- Why XGBoost? For this business model the most important metric was recall (Out of every entry who actually defaulted how many did our model actually classify as a defaulting applicant). We can compare evaluation metrics for every model I tried [here](./reports/metrics.json). XGBoost had the best ROC-AUC and PR-AUC scores for the recall value we targeted.
 
 <br>
 
@@ -94,12 +94,6 @@ loan-default-prediction/
 
 ## Setup & Installation
 
-<!--
-Suggested content (adjust to whatever you actually use — pip, uv, poetry):
-1. Clone the repo
-2. Create virtual environment
-3. Install dependencies
--->
 
 ```bash
 git clone https://github.com/samisiraj/loan-default-prediction
@@ -109,11 +103,6 @@ uv sync
 
 ## Running Locally
 
-<!--
-Suggested content:
-- How to run without Docker (two terminals: uvicorn + python app.py)
-- How to run with Docker (docker build, docker run)
--->
 
 **Without Docker:**
 ```bash
@@ -128,12 +117,6 @@ docker run -p 7860:7860 loan-default-prediction
 
 ## API Usage
 
-<!--
-Suggested content:
-- Example curl request to /predict
-- Note on /ping health check endpoint
-- Link to or embed the Pydantic schema field list if useful
--->
 
 ```bash
 curl -X POST http://127.0.0.1:8080/predict \
@@ -179,7 +162,7 @@ curl -X POST http://127.0.0.1:8080/predict \
 ## Deployment
 
 - Hosted on Render (free tier), Docker-based deployment
-- Single container runs both FastAPI and Gradio via start.sh
+- A single Docker container runs both FastAPI (:8080) and Gradio (:7860) via start.sh.
 
 
 ## Tech Stack
