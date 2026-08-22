@@ -12,6 +12,6 @@ COPY src/ ./src/
 COPY models/ ./models/
 COPY start.sh .
 
-RUN chmod +x start.s
+RUN chmod +x start.sh
 
 CMD ["./start.sh"]
