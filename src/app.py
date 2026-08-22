@@ -1,5 +1,6 @@
 import gradio as gr
 import requests
+import os
 
 API_URL = 'http://127.0.0.1:8080/predict'
 
@@ -450,4 +451,7 @@ with gr.Blocks(title="Loan Default Predictor") as demo:
 
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.getenv("PORT", 7860))
+    )

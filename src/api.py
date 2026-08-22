@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from predict import LoanApplication, predict
+from .predict import LoanApplication, predict
 
 app = FastAPI(title='Loan Default Prediction API')
 
